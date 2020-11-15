@@ -10,6 +10,8 @@ namespace TaxSite.Pages
 {
     public class IndexModel : PageModel
     {
+        public string Salary => (string)(TempData[nameof(Salary)]);
+
         private readonly ILogger<IndexModel> _logger;
 
         public IndexModel(ILogger<IndexModel> logger)
@@ -20,6 +22,12 @@ namespace TaxSite.Pages
         public void OnGet()
         {
 
+        }
+
+        public IActionResult OnPost([FromForm]string salary)
+        {
+            TempData["Salary"] = salary;
+            return RedirectToPage("Results");
         }
     }
 }
